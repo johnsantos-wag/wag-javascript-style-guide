@@ -2,7 +2,7 @@
 
 Other Style Guides
 
-- [React](https://github.com/johnsantos-wag/wag-javascript-styleguide/tree/master/react)
+- [React](https://github.com/johnsantos-wag/wag-javascript-style-guide/tree/master/react)
 
 ## Table of Contents
 
