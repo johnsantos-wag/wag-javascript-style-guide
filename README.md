@@ -137,6 +137,49 @@ const systemIO = {}; // if the acrnonym consist of two letters, uppercase
 export const API_KEY = 'qwerty'; //constant
 ```
 
+## Iterators
+
+- Prefer functional loops when iterating instead of imperative loops (`for loop`, `for in`, `while loop`, etc)
+
+> This will prevent creating side-effects that is often the cause of bugs and this also provides better readability
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+// bad
+let sum = 0;
+for (let num of numbers) {
+  sum += num;
+}
+sum === 15;
+
+// good
+let sum = 0;
+numbers.forEach((num) => {
+  sum += num;
+});
+sum === 15;
+
+// best (use the functional force)
+const sum = numbers.reduce((total, num) => total + num, 0);
+sum === 15;
+
+// bad
+const increasedByOne = [];
+for (let i = 0; i < numbers.length; i++) {
+  increasedByOne.push(numbers[i] + 1);
+}
+
+// good
+const increasedByOne = [];
+numbers.forEach((num) => {
+  increasedByOne.push(num + 1);
+});
+
+// best (keeping it functional)
+const increasedByOne = numbers.map((num) => num + 1);
+```
+
 
 ## Modules 
 
@@ -161,4 +204,31 @@ export default formatUsername;
 
 // good
 export const formatUsername = () => {};
+```
+
+- Separate `import` statements or group by "type" and add whitespaces in between
+
+> A type can be a third party package, utils path, assets path  
+
+```js
+
+// bad
+import _ from 'lodash';
+import { formatName } from './utils';
+import moment from 'moment';
+import dogIcon from '../assets/dog.svg';
+
+// ok
+import _ from 'lodash';
+import moment from 'moment';
+import { formatName } from './utils';
+import dogIcon from '../assets/dog.svg';
+
+// good
+import _ from 'lodash';
+import moment from 'moment';
+
+import { formatName } from './utils';
+
+import dogIcon from '../assets/dog.svg';
 ```
