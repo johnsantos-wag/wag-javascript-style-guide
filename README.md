@@ -1,6 +1,7 @@
 # Wag! JavaScript Style Guide 
 
 Other Style Guides
+  > These style guides inherits from this main style guide. If a certain topic isn't available on these style guides it means that it is already covered on this main guide.
 
 - [React](https://github.com/johnsantos-wag/wag-javascript-style-guide/tree/master/react)
 - [TypeScript](https://github.com/johnsantos-wag/wag-javascript-style-guide/tree/master/typescript)
