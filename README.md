@@ -3,15 +3,16 @@
 Other Style Guides
 
 - [React](https://github.com/johnsantos-wag/wag-javascript-style-guide/tree/master/react)
+- [TypeScript](https://github.com/johnsantos-wag/wag-javascript-style-guide/tree/master/typescript)
 
 ## Table of Contents
 
 1. [Variables](#variables)
 2. [Functions](#functions)
-3. [Types](#types)
-4. [Accessors](#accessors)
-5. [Naming conventions](#naming-conventions)
-6. [Modules](#modules)
+3. [Accessors](#accessors)
+4. [Naming conventions](#naming-conventions)
+5. [Modules](#modules)
+6. [Testing](#testing)
 
 ## Variables:
 
@@ -58,7 +59,7 @@ function getUsers() {
 
 ## Functions:
 
-- Use function expression instead of function declaration
+- Use arrow function instead of function declaration
 
 > This avoids function hoisted which can be confusing to track on
 
@@ -68,19 +69,6 @@ function getDogs() {}
 
 // good
 const getDogs = () => {}
-```
-
-## Types:
-
-- Use `type` when creating a typing definition
-> both works but `type` is much shorter to work on
-
-```ts
-// bad 
-interface Shape {}
-
-// good
-type Shape = {}
 ```
 
 ## Accessors:
@@ -109,6 +97,29 @@ const person = {
 if (!person.age) {
   throw new Error('Invalid age');  
 }
+```
+
+- When retrieving or adding a non camelCase property, use a variable to do that
+
+> This allows the need to disable linting. We usually encounter this when doing our integration with WagApi or wagcontent
+
+```js
+// bad
+const payload = {
+  /* eslint-disable */
+  start_date: '1970-01-01',
+};
+
+payload.start_date
+
+// good
+const startDate = 'start_date';
+const payload = {
+  [startDate]: '1970-01-01',
+};
+
+payload[startDate]
+
 ```
 
 ## Naming conventions:
@@ -231,4 +242,85 @@ import moment from 'moment';
 import { formatName } from './utils';
 
 import dogIcon from '../assets/dog.svg';
+```
+
+- One import per line
+
+> This allows easy understanding when reviewing code (same with one prop per line)
+
+```js
+// bad
+import { formatName, formatBirthday } from './utils'; 
+
+// good
+import {
+  formatName,
+  formatBirthday,
+} from './utils';
+```
+
+## Testing
+
+- Structure the test in two separate `describe` which creates a division between "happy paths" and "exception paths"
+
+> Happy paths for normal user flows; exception paths for edge cases where the function may act abnormally. Separation of test types allow you to separate a normal case and an edge easily
+
+```js
+// bad
+describe('my-test-name', () => {
+  it('should ...', () => {
+    ...
+  });
+  it('should ...', () => {
+    ...
+  });
+});
+
+// good
+describe('my-test-name', () => {
+  describe('happy paths', () => {
+    it('should ...', () => {
+      ...
+    });
+  });
+  describe('exception paths', () => {
+    it('should ...', () => {
+      ...
+    });
+  });
+});
+```
+
+- Use `it` instead of `test` when creating the test and add the convetion of "it should..."
+
+> `it` is much more easy to understand when creating test cases like you are just reading a normal sentence (grammatically correct as well)
+
+```js
+// bad
+describe('my-test', () => {
+  describe('happy paths', () => {
+    test('should ...', () => {
+      ...
+    });
+  });
+  describe('exception paths', () => {
+    test('should ...', () => {
+      ...
+    });
+  });
+});
+
+// good
+describe('my-test', () => {
+  describe('happy paths', () => {
+    it('should ...', () => {
+      ...
+    });
+  });
+  describe('exception paths', () => {
+    it('should ...', () => {
+      ...
+    });
+  });
+});
 ```

@@ -3,9 +3,8 @@
 ## Table of Contents
 
 1. [Functions](#functions)
-2. [Types](#types)
-3. [Naming conventions](#naming-conventions)
-4. [Modules](#modules)
+2. [Naming conventions](#naming-conventions)
+3. [Modules](#modules)
 
 
 ## Functions:
@@ -20,19 +19,6 @@ function DogProfile() {}
 
 // good
 const DogProfile = () => {}
-```
-
-## Types:
-
-- Use `type` when creating a typing definition
-> Both works but `type` is much shorter to work on
-
-```ts
-// bad 
-interface Shape {}
-
-// good
-type Shape = {}
 ```
 
 ## Naming conventions:
