@@ -292,9 +292,9 @@ describe('my-test-name', () => {
 });
 ```
 
-- Use `it` instead of `test` when creating the test and add the convetion of "it should..."
+- Use `it` instead of `test` when creating the test and follow the convetion of "it should..."
 
-> `it` is much more easy to understand when creating test cases like you are just reading a normal sentence (grammatically correct as well)
+> `it` is much more easy to understand when creating test cases like you are just reading a normal sentence
 
 ```js
 // bad
