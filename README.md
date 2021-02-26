@@ -72,6 +72,23 @@ function getDogs() {}
 const getDogs = () => {}
 ```
 
+- Pass an object instead of one-by-one argument
+
+> Passing a one-by-one argument to a function results in scalability problems. This avoids breaking the usage of existing function consumers
+
+```js
+// bad
+const createDog = (name, breed, age) => {}
+const createWalker = (name, age) => {}
+
+// good
+const createDog = (dog) => {}
+const createDog = ({ name, breed, age }) => {}
+
+const createWalker = (walker) => {}
+const createWalker = ({ name, age }) => {}
+```
+
 ## Accessors:
 
 - When accessing a value, use a guard style or an early-return approach
