@@ -342,3 +342,44 @@ describe('my-test', () => {
   });
 });
 ```
+
+- Query first the element before doing an assertion (arrange, act, assert guidelines)
+
+> Arrange, act, assert guideline is based on the Microsoft model of writing test. It encourages you to (arrange) the data, elements and etc for your tests ahead of time, then you provide the actions (act) that the test will do. Sometimes the (act) part can be done along with the arrangement of the test. Then after that, do the assertions (assert).
+> For more info, visit: https://docs.microsoft.com/en-us/visualstudio/test/unit-test-basics?view=vs-2019#write-your-tests
+
+```js
+// bad
+describe('my-test', () => {
+  describe('happy paths', () => {
+    test('should ...', () => {
+      expect(screen.getByTestId('my-element').toHaveTextContent('Hello World'))
+    });
+  });
+  describe('exception paths', () => {
+    test('should ...', () => {
+      ...
+    });
+  });
+});
+
+// good
+describe('my-test', () => {
+  describe('happy paths', () => {
+    it('should ...', () => {
+      // arrange & act
+      const expected = 'Hello World';
+      const elem = screen.getByTestId('my-element');
+
+      // assert
+      expect(elem.toHaveTextContent(expected))
+    });
+  });
+  describe('exception paths', () => {
+    it('should ...', () => {
+      ...
+    });
+  });
+});
+
+```
